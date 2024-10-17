@@ -1,5 +1,5 @@
 controllers:
     resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+        path: ../src/Presentation/Http/Rest/Controller
+        namespace: Presentation\Http\Rest\Controller
     type: attribute
