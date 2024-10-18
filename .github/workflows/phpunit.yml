@@ -19,6 +19,9 @@ jobs:
         with:
           php-version: '8.3.12'
           extensions: mbstring, intl, pdo_pgsql
+      - name: Install Composer dependencies
+        run: |
+            composer install --prefer-dist --no-interaction
 
   unit_tests:
     runs-on: ubuntu-latest
