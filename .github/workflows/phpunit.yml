@@ -27,6 +27,20 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup
     steps:
+      - name: xxxxxxxxxxxxxxxxxLIST VENDOR/BIN DIRECTORYxxxxxxxxxxxxxxxxx
+        run: ls -la ./vendor/bin
+      - name: xxxxxxxxxxxxxxxxxSHOW PHPUNIT PATHxxxxxxxxxxxxxxxxx
+        run: |
+          echo "PHPUnit path: $(pwd)/vendor/bin/phpunit"
+      - name: xxxxxxxxxxxxxxxxxGREP PHPUNITxxxxxxxxxxxxxxxxx
+        run: |
+          echo "Searching for PHPUnit..."
+          ls -la ./vendor/bin | grep phpunit
+      - name: xxxxxxxxxxxxxxxxxFIND PHPUNITxxxxxxxxxxxxxxxxx
+        run: |
+          echo "Searching for PHPUnit..."
+          find . -name "phpunit" -type f
+
       - name: Checkout
         uses: actions/checkout@v2
 
