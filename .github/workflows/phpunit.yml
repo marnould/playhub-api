@@ -29,7 +29,7 @@ jobs:
 
       - name: Run PHPUnit Unit Tests
         run: |
-          vendor/bin/phpunit --testsuite "Unit Tests"
+          ./vendor/bin/phpunit --testsuite "Unit Tests"
 
   functional_tests:
     runs-on: ubuntu-latest
@@ -40,4 +40,4 @@ jobs:
 
       - name: Run PHPUnit Functional Tests
         run: |
-          vendor/bin/phpunit --testsuite "Functional Tests"
+          ./vendor/bin/phpunit --testsuite "Functional Tests"
