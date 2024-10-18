@@ -43,5 +43,11 @@ Documentation of api routes is done via attributes directly in the controllers.
 ## Routing
 Routing is in ``config/routes.yaml``
 
+## Tests
+PhpUnit v11.4.1
+
+- Unit tests -> ``tests/Unit``
+- Functional tests -> ``tests/Functional``
+
 ## Architecture
 This project uses a hexagonal architecture with Command Query Responsibility Segregation (CQRS) and a DomainDrivenDesign (DDD) approach, but without bounded contexts.
