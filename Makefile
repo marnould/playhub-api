@@ -42,11 +42,11 @@ dbuildup: dbuild dup
 ###> PhpUnit ###
 testu:
 	$(MAKEINFO) info="Unit Tests"
-	$(PHPUNIT) --testsuite "Unit Tests"
+	$(PHPUNIT) --testsuite "unit"
 
 testf:
 	$(MAKEINFO) info="Functional Tests"
-	$(PHPUNIT) --testsuite "Functional Tests"
+	$(PHPUNIT) --testsuite "functional"
 
 test: testu testf
 ###< PhpUnit ###
