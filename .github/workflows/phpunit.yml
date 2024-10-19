@@ -1,0 +1,33 @@
+name: Phpunit Tests
+
+on:
+  pull_request:
+    branches:
+      - dev
+      - staging
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: php-actions/composer@v6
+
+      - name: Running unit tests
+        uses: php-actions/phpunit@master
+        with:
+          version: 11.4.1
+          php_version: 8.3
+          configuration: phpunit.xml
+          testsuite: unit
+
+      - name: Running functional tests
+        uses: php-actions/phpunit@master
+        with:
+          version: 11.4.1
+          php_version: 8.3
+          configuration: phpunit.xml
+          testsuite: functional
