@@ -16,7 +16,10 @@ jobs:
 
       - uses: php-actions/composer@v6
 
-      - name: Running unit tests
+      - name: Run PHP Cs Fixer
+        run: ./vendor/bin/php-cs-fixer fix --dry-run --diff
+
+      - name: Run PHP Unit Unit tests
         uses: php-actions/phpunit@master
         with:
           version: 11.4.1
@@ -24,7 +27,7 @@ jobs:
           configuration: phpunit.xml
           testsuite: unit
 
-      - name: Running functional tests
+      - name: Run PHP Unit Functional tests
         uses: php-actions/phpunit@master
         with:
           version: 11.4.1
