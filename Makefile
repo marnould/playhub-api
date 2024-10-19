@@ -9,6 +9,7 @@ BOLD := \033[1m
 ###> Globals
 DOCKER = docker-compose
 PHPUNIT = ./vendor/bin/phpunit
+PHPCSFIXER = ./vendor/bin/php-cs-fixer
 MAKEINFO = $(MAKE) info
 ###< Globals
 
@@ -50,3 +51,8 @@ testf:
 
 test: testu testf
 ###< PhpUnit ###
+
+###> PhpCsFixer ###
+fix:
+	$(PHPCSFIXER) fix
+###< PhpCsFixer ###
