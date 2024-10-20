@@ -1,26 +1,24 @@
 services:
   api:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     image: playhub-api
-    ports:
-      - "9000:9000"
     volumes:
       - .:/var/www/html:cached
     depends_on:
       - pgsql
-    environment:
-      DATABASE_URL: "pgsql://playhub:playhub@db:5432/playhub"
 
   pgsql:
+    platform: linux/x86_64 # Required for Apple Silicon machine based
     image: postgres:13
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+#    volumes:
+#      - pgsql:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: playhub
+      POSTGRES_DATABASE: playhub
       POSTGRES_USER: playhub
       POSTGRES_PASSWORD: playhub
 
 volumes:
-  pgdata:
+  pgsql:
