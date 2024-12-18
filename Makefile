@@ -7,9 +7,11 @@ BOLD := \033[1m
 ###< ANSI color codes
 
 ###> Globals
+BINCONSOLE = bin/console
 DOCKER = docker-compose
 PHPUNIT = ./vendor/bin/phpunit
 PHPCSFIXER = ./vendor/bin/php-cs-fixer
+DOCTRINEMIGRATION = doctrine:migrations
 MAKEINFO = $(MAKE) info
 ###< Globals
 
@@ -19,6 +21,11 @@ info:
 warning:
 	@echo "$(YELLOW)$(BOLD)$(warning)$(RESET)"
 ###< Internal
+
+###> Symfony
+clearcache:
+	$(BINCONSOLE) cache:clear
+###< Symfony
 
 ###> Docker-compose ###
 dbuild:
@@ -56,3 +63,11 @@ test: testu testf
 fix:
 	$(PHPCSFIXER) fix
 ###< PhpCsFixer ###
+
+###> Doctrine ###
+migration:
+	$(BINCONSOLE) $(DOCTRINEMIGRATION):diff
+
+migrate:
+	$(BINCONSOLE) $(DOCTRINEMIGRATION):migrate
+###< Doctrine ###
