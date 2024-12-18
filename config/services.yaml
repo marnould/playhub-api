@@ -18,5 +18,12 @@ services:
     Track\:
         resource: '../src/Track/'
 
+    # Clients
+    Core\Domain\Spotify\Port\SpotifyClientInterface:
+        class: Core\Infrastructure\Spotify\Client\SpotifyHttpClient
+        arguments:
+            $spotifyClientId: '%env(SPOTIFY_CLIENT_ID)%'
+            $spotifyClientSecret: '%env(SPOTIFY_CLIENT_SECRET)%'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
