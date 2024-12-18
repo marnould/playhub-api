@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                   https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+    <entity name="Track\Domain\Entity\Track" table="track">
+        <id name="id" type="uuid" />
+
+        <field name="title" />
+        <field name="createdAt" type="carbon_immutable" />
+        <field name="sourcePlatform" type="source_platform_type" />
+        <field name="sourceTrackId" />
+        <field name="streamUrl" />
+
+        <many-to-many field="artists" inversed-by="tracks" target-entity="Track\Domain\Entity\Artist">
+            <join-table name="tracks_artists">
+                <join-columns>
+                    <join-column name="track_id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="artist_id" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+
+        <many-to-one field="album" target-entity="Track\Domain\Entity\Album" inversed-by="tracks" />
+    </entity>
+</doctrine-mapping>
