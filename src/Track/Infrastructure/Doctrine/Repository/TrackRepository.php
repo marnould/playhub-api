@@ -64,7 +64,7 @@ class TrackRepository implements TrackRepositoryInterface
         return $this->em->createQueryBuilder()
             ->select('t')
             ->from(Track::class, 't')
-            ->where('t.source = :source')
+            ->where('t.sourcePlatform = :source')
             ->setParameter('source', $source->value)
             ->indexBy('t', 't.sourceTrackId')
             ->getQuery()

@@ -1,0 +1,3 @@
+Track:
+  resource: '../src/Track/Infrastructure/Resources/Routes'
+  type: directory

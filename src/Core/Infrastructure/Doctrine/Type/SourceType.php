@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Infrastructure\Doctrine\Type;
+namespace Core\Infrastructure\Doctrine\Type;
 
 use Core\Domain\ValueObject\Source;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
