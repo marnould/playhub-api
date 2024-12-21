@@ -14,7 +14,7 @@ final class Version20241020014752 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Track, Album and Artist entities creation';
     }
 
     public function up(Schema $schema): void

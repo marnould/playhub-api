@@ -7,6 +7,7 @@ namespace Track\Domain\Entity;
 use Carbon\CarbonImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Track\Domain\ValueObject\SourcePlatform;
 
@@ -23,6 +24,7 @@ class Track
         private readonly string $sourceTrackId,
         private readonly string $streamUrl,
     ) {
+        $this->id = Uuid::uuid4();
         $this->createdAt = CarbonImmutable::now();
         $this->artists = new ArrayCollection();
     }

@@ -7,6 +7,7 @@ namespace Track\Domain\Entity;
 use Carbon\CarbonImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 class Album
@@ -19,6 +20,7 @@ class Album
 
     private function __construct(private readonly string $title)
     {
+        $this->id = Uuid::uuid4();
         $this->createdAt = CarbonImmutable::now();
 
         $this->tracks = new ArrayCollection();

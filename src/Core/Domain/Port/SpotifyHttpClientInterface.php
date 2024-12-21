@@ -6,4 +6,5 @@ namespace Core\Domain\Port;
 
 interface SpotifyHttpClientInterface
 {
+    public function getSavedTracks(int $offset, int $limit): array;
 }
