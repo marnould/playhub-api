@@ -5,7 +5,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                    https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
     <entity name="Track\Domain\Entity\Album" table="album">
-        <id name="id" type="uuid" column="id" />
+        <id name="id" type="uuid" />
 
         <field name="title" />
         <field name="createdAt" type="carbon_immutable" />

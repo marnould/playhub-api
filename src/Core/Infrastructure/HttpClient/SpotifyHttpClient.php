@@ -10,6 +10,11 @@ use Core\Domain\Repository\TokenRepositoryInterface;
 use Core\Domain\ValueObject\Source;
 use Ramsey\Uuid\Nonstandard\Uuid;
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class SpotifyHttpClient implements SpotifyHttpClientInterface
@@ -27,7 +32,7 @@ class SpotifyHttpClient implements SpotifyHttpClientInterface
         $this->client = HttpClient::create();
     }
 
-    /** @TODO Need to be passed in front in order to ask the user grants */
+    /** @TODO Need to be passed in front in order to ask the user grants and retrieve the auth code used in getAccessToken() call */
     private function authorize()
     {
         $responseType = 'code';
@@ -76,6 +81,13 @@ class SpotifyHttpClient implements SpotifyHttpClientInterface
         }
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws ClientExceptionInterface
+     */
     private function getAccessToken(): Token
     {
         $encodedCredentials = base64_encode(
@@ -92,7 +104,7 @@ class SpotifyHttpClient implements SpotifyHttpClientInterface
                 ],
                 'body' => [
                     'grant_type' => 'authorization_code',
-                    //                    'code' => self::DEV_SPOTIFY_AUTH_CODE_DEV,
+                    'code' => null, // @TODO Implement auth code retrieve with front
                     'redirect_uri' => self::REDIRECT_URI,
                 ],
             ]
@@ -134,5 +146,31 @@ class SpotifyHttpClient implements SpotifyHttpClientInterface
         $existingToken->update($responseToken['access_token'], $responseToken['expires_in']);
 
         return $existingToken;
+    }
+
+    /**
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+     */
+    public function getSavedTracks(int $offset, int $limit): array
+    {
+        $response = $this->client->request(
+            'GET',
+            sprintf(
+                self::SPOTIFY_BASE_URL.'/me/tracks?offset=%s&limit=%s&market=FR',
+                $offset,
+                $limit
+            ),
+            [
+                'headers' => [
+                    'Authorization' => 'Bearer '.$this->getToken()->getAccessToken(),
+                ],
+            ]
+        );
+
+        return $response->toArray()['items'];
     }
 }

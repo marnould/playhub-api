@@ -18,9 +18,21 @@ services:
     Track\:
         resource: '../src/Track/'
 
-    # Clients
-    Core\Domain\Spotify\Port\SpotifyClientInterface:
-        class: Core\Infrastructure\Spotify\Client\SpotifyHttpClient
+    # Bus & Handlers
+    _instanceof:
+        Core\Domain\Bus\Query\QueryHandlerInterface:
+            tags:
+                - { name: messenger.message_handler, bus: query.bus }
+        Core\Domain\Bus\Command\CommandHandlerInterface:
+            tags:
+                - { name: messenger.message_handler, bus: command.bus }
+
+    # Controllers
+    Track\Presentation\Http\Rest\Controller\:
+        resource: '../src/Track/Presentation/Http/Rest/Controller'
+        tags: [ 'controller.service_arguments' ]
+
+    Core\Infrastructure\HttpClient\SpotifyHttpClient:
         arguments:
             $spotifyClientId: '%env(SPOTIFY_CLIENT_ID)%'
             $spotifyClientSecret: '%env(SPOTIFY_CLIENT_SECRET)%'

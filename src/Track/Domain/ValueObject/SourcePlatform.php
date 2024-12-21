@@ -6,8 +6,7 @@ namespace Track\Domain\ValueObject;
 
 enum SourcePlatform: string
 {
-    case SPOTIFY = 'login';
-    case YOUTUBE = 'subscription_funnel';
+    case SPOTIFY = 'spotify';
 
     public static function getContexts(): array
     {
