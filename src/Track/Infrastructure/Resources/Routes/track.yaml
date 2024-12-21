@@ -2,3 +2,8 @@ spotify_import_saved_tracks:
   path: /spotify/import-saved-tracks
   controller: Track\Presentation\Http\Rest\Controller\Spotify\ImportSavedTracksController
   methods: [ 'POST' ]
+
+get_tracks:
+  path: /api/tracks
+  controller: Track\Presentation\Http\Rest\Controller\GetTracksController
+  methods: [ 'GET' ]

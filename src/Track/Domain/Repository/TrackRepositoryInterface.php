@@ -16,6 +16,8 @@ interface TrackRepositoryInterface
 
     public function findAll(): array;
 
+    public function findAllWithArtistsAndAlbums(): array;
+
     public function findAllBySource(SourcePlatform $source): array;
 
     public function save(Track $track, bool $flush = true): void;

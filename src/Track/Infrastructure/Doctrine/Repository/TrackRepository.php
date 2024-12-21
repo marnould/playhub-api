@@ -58,6 +58,17 @@ class TrackRepository implements TrackRepositoryInterface
             ->getArrayResult();
     }
 
+    public function findAllWithArtistsAndAlbums(): array
+    {
+        return $this->em->createQueryBuilder()
+            ->select('t, art, alb')
+            ->from(Track::class, 't')
+            ->join('t.artists', 'art')
+            ->join('t.album', 'alb')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     /** @throws QueryException */
     public function findAllBySource(SourcePlatform $source): array
     {
